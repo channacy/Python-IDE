@@ -18,7 +18,8 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/ide'
+LOGOUT_REDIRECT_URL = '/ide'
 
 # False if not in os.environ because of casting above
 DEBUG = os.getenv('DEBUG')
@@ -80,7 +81,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 
 DATABASES = {
     'default': {

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="code-file">
 <h2>Edit and Run File: {{ code_file.name }}</h2>
-
+<p id="code-file-desc">Code automatically saves.</p>
 <!-- Code Editor -->
 <form id="code-form" method="post">
     {% csrf_token %}
@@ -10,9 +11,11 @@
     <button type="button" id="run-button">Run Code</button>
 </form>
 
-<h3>Output</h3>
-<pre id="output"></pre>
-
+<div class="output-container">
+    <h3>Output</h3>
+    <pre id="output"></pre>
+</div>
+</div>
 <!-- CodeMirror Scripts -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>

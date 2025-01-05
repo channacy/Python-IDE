@@ -1,28 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Welcome to the Python IDE</h2>
+<div class="home">
+    <h2>Welcome to the Python IDE</h2>
+    <!-- Code Editor -->
+    <form id="code-form" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="example.py" required>
+        <button type="submit">Create File</button>
+    </form>
 
-<!-- Code Editor -->
-<form id="code-form" method="post">
-    {% csrf_token %}
-    <input type="text" name="name" placeholder="example.py" required>
-    <button type="submit">Add File</button>
-</form>
-
-<!-- Display Saved Files -->
-<h3>Saved Files</h3>
-<ul>
-    {% for file in files %}
-    <li>
-        <a href="{% url 'code_file_detail' file.pk %}">{{ file.name }}</a> ({{ file.created_at|date:"Y-m-d H:i" }})
-        <form method="POST" action="{% url 'delete_file' file.pk %}">
-            {% csrf_token %}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-    {% empty %}
-    <p>No files saved yet.</p>
-    {% endfor %}
-</ul>
-  
+    <!-- Display Saved Files -->
+    <h3>Saved Files</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>File</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+            <tr>
+                <td>
+                    <a href="{% url 'code_file_detail' file.pk %}">{{ file.name }}</a>
+                    ({{ file.created_at|date:"Y-m-d H:i" }})
+                </td>
+                <td>
+                    <form method="POST" action="{% url 'delete_file' file.pk %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button id="delete-btn" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No files saved yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

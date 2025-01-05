@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="signup">
+<h2>Welcome to the Python IDE</h2>
 <h2>Sign Up</h2>
-<form method="post">
+<form class="signup-form" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Sign Up</button>
 </form>
 <a href="{% url 'login' %}">Already have an account? Log in</a>
+</div>
 {% endblock %}

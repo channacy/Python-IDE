@@ -1,3 +1,134 @@
 * {
-    background-color: lavender;
+    background-color: #ffffff;
+    font-family: verdana;
+    margin: 0;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: #333;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+
+main {
+    padding: 1em;
+}
+
+.login,
+.signup, 
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.login button,
+.signup-form button, 
+#code-form button{
+    padding: 1em;
+    background-color: #52b788;
+    color: white;
+    width: 10em;
+    border-radius: 5px;
+    border: 0.06em solid #ccc;
+}
+
+.login button:hover,
+.signup button:hover,
+#code-form button:hover {
+    background-color: #40916c;
+}
+
+.login-form,
+.signup-form {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+
+
+.login-form input,
+.signup-form input,
+#code-form input {
+    font-size: 1.1250em;
+    width: 14em;
+    padding: 0.625em;
+    border-radius: 5px;
+    border: 0.06em solid #ccc;
+}
+
+#code-form input {
+   height: 0.85em;
+}
+
+.signup-form ul {
+    background-color: transparent;
+    font-size: 0.75em;
+    color: #333;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+}
+
+#delete-btn {
+    width: 10em;
+    padding: 1em;
+    background-color: #e24f34;
+    color: white;
+    width: 6em;
+    border-radius: 5px;
+    border: 0.06em solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: .8em;
+    text-align: left;
+}
+
+thead th {
+    background-color: #f4f4f4;
+    padding: 0.5;
+    border: 0.05em solid #ddd;
+}
+
+tbody td {
+    padding: 0.5em;
+    border: 0.05em solid #ddd;
+}
+
+.code-file {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#code-file-desc {
+    color: #333;
+    font-size: 0.875em;
+}
+

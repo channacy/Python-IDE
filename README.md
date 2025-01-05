@@ -12,8 +12,9 @@
 # Tools
 - Django
 - CodeMirror
-- CSS
-
+- HTML,CSS
+- JavaScript
+  
 # Resources
 - [how to run virtualenv python on mac](https://stackoverflow.com/questions/59637973/how-to-run-virtualenv-python-on-mac)
 - [Welcome to Django CodeMirror’s documentation!](https://djangocodemirror.readthedocs.io/en/latest/)

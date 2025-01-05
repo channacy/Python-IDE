@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit and Run File: {{ code_file.name }}</h2>
+
+<!-- Code Editor -->
+<form id="code-form" method="post">
+    {% csrf_token %}
+    <textarea id="code-editor" name="content">{{ code_file.content }}</textarea>
+    <button type="button" id="run-button">Run Code</button>
+</form>
+
+<h3>Output</h3>
+<pre id="output"></pre>
+
+<!-- CodeMirror Scripts -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+
+<script>
+    const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+        mode: 'python',
+        lineNumbers: true,
+        theme: 'default',
+    });
+
+    // auto save the code file
+    let autoSaveTimeout;
+    editor.on('change', () => {
+        clearTimeout(autoSaveTimeout); // Clear previous timeout
+        autoSaveTimeout = setTimeout(() => {
+            const code = editor.getValue();
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken,
+                },
+                body: new URLSearchParams({ content: code, action: 'auto_save' }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message); // Log auto-save status
+            })
+            .catch(error => console.error('Auto-save failed:', error));
+        }, 2000); // Save every 2 seconds after user stops typing
+    });
+
+    // run the code
+    document.getElementById('run-button').addEventListener('click', async () => {
+    const code = editor.getValue();
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    const response = await fetch('', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken,
+        },
+        body: new URLSearchParams({ content: code, action: 'run' }),
+    });
+
+    const data = await response.json();
+    const outputElement = document.getElementById('output');
+    if (data.status === 'error') {
+        outputElement.style.color = 'red'; // Highlight errors in red
+    } else {
+        outputElement.style.color = 'black'; // Regular output in black
+    }
+    outputElement.textContent = data.output; // Display output or errors
+});
+</script>
+{% endblock %}

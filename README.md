@@ -13,3 +13,8 @@
 - Django
 - CodeMirror
 - CSS
+
+# Resources
+[how to run virtualenv python on mac](https://stackoverflow.com/questions/59637973/how-to-run-virtualenv-python-on-mac)
+[Welcome to Django CodeMirror’s documentation!](https://djangocodemirror.readthedocs.io/en/latest/)
+[Ace, CodeMirror, and Monaco: A Comparison of the Code Editors You Use in the Browser](https://blog.replit.com/code-editors)
